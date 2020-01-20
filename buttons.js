@@ -1,73 +1,85 @@
-Element.prototype.grayout=function(){this.style.color="gray"}
-Element.prototype.restore=function(){this.style.color="white"
-this.style.display="inline-block"
-}
-Element.prototype.hide=function(){this.style.display="none"}
-Element.prototype.show=function(){this.style.display="block"}
-Element.prototype.disable=function(){this.style.color="black"}
-Element.prototype.changeSrc=function(imageSrc){
-  
-    opacity=1
-    fade=true
-    changeOpacity=()=>{
-      fade?opacity-=0.1:opacity+=0.1
-      this.style.opacity=opacity
-      if(opacity<0 && fade){
-        this.src=imageSrc
-        fade=false
-      }
-      if (opacity>1) {clearTimeout(timer)
-        //alert("finished")
-        return null
-      }
-      timer=setTimeout(changeOpacity,100)
+
+Buttons = new function() {
+  basicStyle="color:black;background:white;font-size:4.5vw;font-family:verdana;"
+  buttonStyle=basicStyle+"border-style:solid;border-width:1px;verticalAlign:top;padding:5px;display:inlineBlock"
+  listStyle=buttonStyle+"text-align:left;"
+  imageStyle=basicStyle+"overflowX:hidden;marginLeft:auto;"+
+    "marginRight:auto;verticalAlign:middle;" 
+
+  makeElement=function(id,type,width,style,text,event,action){
+    element=document.createElement(type)
+    element.style.cssText=style
+    element.style.width=width+"%"
+    element.id=id
+    element.innerHTML=text
+    document.body.appendChild(element)
+    element.addEventListener(event,action)
+    return element
+  }
+  this.makeButton=function(id,width,text,action){
+    makeElement(id,"button",width,buttonStyle,text,"click",action)
+  }
+  makeKeyButton=function(id,width,style,text,action){
+    makeElement(id,"button",width,style,text,"click",action)
+  }
+  makeTextButton=function(id){
+    makeElement(id,"button",100,buttonStyle,"","change",()=>alert(6))
+  }
+  this.makeInputButton=function(id){
+    makeTextButton(id)
+    makeKeyboard()
+  }
+  makeKeyboard=function(){
+    textToShow=""
+    keyboardCase="lowercase"
+    changeCase=()=>{
+      keyboardCase=keyboardCase=="lowercase"?"uppercase":"lowercase"
+      characters[keyboardCase].line1.split("").
+        forEach((v,i)=>text("kb1"+i).innerHTML=v)
+      characters[keyboardCase].line2.split("").
+        forEach((v,i)=>text("kb2"+i).innerHTML=v)
+      characters[keyboardCase].line3.split("").
+        forEach((v,i)=>text("kb3"+i).innerHTML=v)
+      characters[keyboardCase].line4.split("").
+        forEach((v,i)=>text("kb4"+i).innerHTML=v)
     }
-  changeOpacity()
+    characters=[]
+    characters["lowercase"]={line1:"1234567890",line2:"qwertyuiop",
+line3:"asdfghjkl",line4:"zxcvbnm"}
+    characters["uppercase"]={line1:"$£€%&@?!#*",line2:"QWERTYUIOP",
+line3:"ASDFGHJKL",line4:"ZXCVBNM"}
+    addCharacter=(letter)=>{
+      textToShow=textToShow+letter
+      inputBox.innerHTML=textToShow
+      if (keyboardCase=="uppercase") changeCase()
+    }
+    text=(id)=>document.getElementById(id)
+    del=()=>{
+      textToShow=inputBox.innerHTML=textToShow.
+        slice(0,textToShow.length-1)
+      inputBox.text=textToShow
+    }
+    showKeyboard=()=>{
+      line1=characters[keyboardCase].line1.split("")
+      line1.forEach((v,i)=>
+        makeKeyButton("kb1"+i,10,buttonStyle,v,  
+         ()=>addCharacter(text("kb1"+i).innerHTML)))
+      line2=characters[keyboardCase].line2.split("")
+      line2.forEach((v,i)=>
+        makeKeyButton("kb2"+i,10,buttonStyle,v,
+          ()=>addCharacter(text("kb2"+i).innerHTML)))
+      makeKeyButton("filler",5,buttonStyle,"&#8202;")
+line3=characters[keyboardCase].line3.split("")
+line3.forEach((v,i)=>makeKeyButton("kb3"+i,10,buttonStyle,v,()=>addCharacter(text("kb3"+i).innerHTML)))
+makeKeyButton("filler",5,buttonStyle,"&#8194;")
+makeKeyButton("case",15,buttonStyle,"\u21E7",()=>changeCase())
+line4=characters[keyboardCase].line4.split("")
+line4.forEach((v,i)=>makeKeyButton("kb4"+i,10,buttonStyle,v,()=>addCharacter(text("kb4"+i).innerHTML)))
+makeKeyButton("delete",15,buttonStyle,"\u232B",()=>del())
+makeKeyButton("space",50,buttonStyle,"space",()=>addCharacter(" "))
 }
- 
-style="color:white;background:black;font-size:4vw;font-family:verdana;"
-buttonStyle = style+"border-style:solid;border-width:1px;"
- 
-listStyle=buttonStyle+"text-align:left;"
- 
-imageStyle=style+"overflowX:hidden;marginLeft:auto;marginRight:auto;verticalAlign:middle;"
- 
-document.body.style=style
- 
-addElement=(id,type,width,style,text)=>{
-  element=document.createElement(type)
-  element.style.cssText=style
-  element.style.width=width+"%"
-  element.id=id
-  element.innerHTML=text
-  document.body.appendChild(element)
-  return element
+showKeyboard()
+  }
 }
- 
-addButton=(id,width=100,style=buttonStyle,text,action)=>{
-  e=addElement(id,"button",width,style,text)
-   .addEventListener("click",action)
-  return e
-}
- 
-addImageButton=(id,action)=>{
-  e=addElement(id,"img",100,imageStyle,"image")
-    .addEventListener("click",action)
-  return e
-}
- 
-addPhotoSelectorButton=(id,width,style,text,action)=>{
-  e=addElement(id,"input",width,style,text)
-  e.accept="image/*"
-  e.type="file"
-  e.defaultValue="select photos"
-  e.multiple=true
-  e.addEventListener("change",
-   (e)=>{urls=Array.from(e.target.files)
-   action(urls)
-  })
-}
- 
-colorButton=(id,color)=>{
-  document.getElementById(id).style.color=color
-}
+Buttons.makeButton("button1",8,"button",(e)=>e.target.innerHTML="78")
+Buttons.makeInputButton("inputBox")
