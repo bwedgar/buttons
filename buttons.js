@@ -40,71 +40,71 @@ Buttons = new function() {
   makeTextButton = function(id) {
     makeElement(id, "button", 100, buttonStyle, "", "change", () => alert(6))
   }
-  this.makeInputButton = function(id) {
-    InputButton.makeInputButton(id)
+
+  //InputButton =  function() {
+  this.makeInputButton2 = function() {
+    this.makeButton("kbInputButton", 100, " ", () => alert(7))
+    makeKeyboard()
   }
-  InputButton = new function() {
-    this.makeInputButton2 = function() {
-      Buttons.makeButton("kbInputButton", 100, " ", () => alert(7))
-      makeKeyboard()
-    }
-    textToShow = ""
-    const textChanged = new Event('textChanged');
-    keyboardCase = "lowercase"
-    changeCase = () => {
-      keyboardCase = keyboardCase == "lowercase" ? "uppercase" : "lowercase"
-      characters[keyboardCase].line1.split("").
-      forEach((v, i) => text("kb1" + i).innerHTML = v)
-      characters[keyboardCase].line2.split("").
-      forEach((v, i) => text("kb2" + i).innerHTML = v)
-      characters[keyboardCase].line3.split("").
-      forEach((v, i) => text("kb3" + i).innerHTML = v)
-      characters[keyboardCase].line4.split("").
-      forEach((v, i) => text("kb4" + i).innerHTML = v)
-    }
-    characters = []
-    characters["lowercase"] = {
-      line1: "1234567890",
-      line2: "qwertyuiop",
-      line3: "asdfghjkl",
-      line4: "zxcvbnm"
-    }
-    characters["uppercase"] = {
-      line1: "$£€%&@?!#*",
-      line2: "QWERTYUIOP",
-      line3: "ASDFGHJKL",
-      line4: "ZXCVBNM"
-    }
-    addCharacter = (letter) => {
-      textToShow = textToShow + letter
-      kbInputButton.innerHTML = textToShow
-      if (keyboardCase == "uppercase") changeCase()
-    }
-    text = (id) => document.getElementById(id)
-    del = () => {
-      textToShow = textToShow.slice(0, textToShow.length - 1)
-      kbInputButton.innerHTML = textToShow
-    }
+  console.log(textToShow)
     makeKeyboard = () => {
-      console.log("make keyboard")
-      line1 = characters[keyboardCase].line1.split("")
-      line1.forEach((v, i) =>
-        makeKeyButton("kb1" + i, 10, buttonStyle, v,
-          () => addCharacter(text("kb1" + i).innerHTML)))
-      line2 = characters[keyboardCase].line2.split("")
-      line2.forEach((v, i) =>
-        makeKeyButton("kb2" + i, 10, buttonStyle, v,
-          () => addCharacter(text("kb2" + i).innerHTML)))
-      makeKeyButton("kbfiller", 5, buttonStyle, "&#8202;")
-      line3 = characters[keyboardCase].line3.split("")
-      line3.forEach((v, i) => makeKeyButton("kb3" + i, 10, buttonStyle, v, () => addCharacter(text("kb3" + i).innerHTML)))
-      makeKeyButton("kbfiller", 5, buttonStyle, "&#8194;")
-      makeKeyButton("kbcase", 15, buttonStyle, "\u21E7", () => changeCase())
-      line4 = characters[keyboardCase].line4.split("")
-      line4.forEach((v, i) => makeKeyButton("kb4" + i, 10, buttonStyle, v, () => addCharacter(text("kb4" + i).innerHTML)))
-      makeKeyButton("kbdelete", 15, buttonStyle, "\u232B", () => del())
-      makeKeyButton("kbspace", 50, buttonStyle, "space", () => addCharacter(" "))
-      //hideElementsWithIdStartingWith("kb")
-    }
+      textToShow = ""
+  const textChanged = new Event('textChanged');
+  keyboardCase = "lowercase"
+  changeCase = () => {
+    keyboardCase = keyboardCase == "lowercase" ? "uppercase" : "lowercase"
+    characters[keyboardCase].line1.split("").
+    forEach((v, i) => text("kb1" + i).innerHTML = v)
+    characters[keyboardCase].line2.split("").
+    forEach((v, i) => text("kb2" + i).innerHTML = v)
+    characters[keyboardCase].line3.split("").
+    forEach((v, i) => text("kb3" + i).innerHTML = v)
+    characters[keyboardCase].line4.split("").
+    forEach((v, i) => text("kb4" + i).innerHTML = v)
   }
+  characters = []
+  characters["lowercase"] = {
+    line1: "1234567890",
+    line2: "qwertyuiop",
+    line3: "asdfghjkl",
+    line4: "zxcvbnm"
+  }
+  characters["uppercase"] = {
+    line1: "$£€%&@?!#*",
+    line2: "QWERTYUIOP",
+    line3: "ASDFGHJKL",
+    line4: "ZXCVBNM"
+  }
+  addCharacter = (letter) => {
+    textToShow = textToShow + letter
+    kbInputButton.innerHTML = textToShow
+    if (keyboardCase == "uppercase") changeCase()
+  }
+  text = (id) => document.getElementById(id)
+  del = () => {
+    textToShow = textToShow.slice(0, textToShow.length - 1)
+    kbInputButton.innerHTML = textToShow
+  }
+
+    console.log("make keyboard")
+    line1 = characters[keyboardCase].line1.split("")
+    line1.forEach((v, i) =>
+      makeKeyButton("kb1" + i, 10, buttonStyle, v,
+        () => addCharacter(text("kb1" + i).innerHTML)))
+    line2 = characters[keyboardCase].line2.split("")
+    line2.forEach((v, i) =>
+      makeKeyButton("kb2" + i, 10, buttonStyle, v,
+        () => addCharacter(text("kb2" + i).innerHTML)))
+    makeKeyButton("kbfiller", 5, buttonStyle, "&#8202;")
+    line3 = characters[keyboardCase].line3.split("")
+    line3.forEach((v, i) => makeKeyButton("kb3" + i, 10, buttonStyle, v, () => addCharacter(text("kb3" + i).innerHTML)))
+    makeKeyButton("kbfiller", 5, buttonStyle, "&#8194;")
+    makeKeyButton("kbcase", 15, buttonStyle, "\u21E7", () => changeCase())
+    line4 = characters[keyboardCase].line4.split("")
+    line4.forEach((v, i) => makeKeyButton("kb4" + i, 10, buttonStyle, v, () => addCharacter(text("kb4" + i).innerHTML)))
+    makeKeyButton("kbdelete", 15, buttonStyle, "\u232B", () => del())
+    makeKeyButton("kbspace", 50, buttonStyle, "space", () => addCharacter(" "))
+    //hideElementsWithIdStartingWith("kb")
+  }
+  //  }
 }
