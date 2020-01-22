@@ -5,6 +5,22 @@ Buttons = new function() {
   imageStyle = basicStyle + "overflowX:hidden;marginLeft:auto;" +
     "marginRight:auto;verticalAlign:middle;"
 
+  Element.prototype.hide = function() {
+    this.style.display = "none"
+  }
+  Element.prototype.show = function() {
+    this.style.display = "inline"
+  }
+  hideElementsWithIdStartingWith = function(idString) {
+    document.querySelectorAll("button").forEach(e => {
+      if (e.id.slice(0, idString.length) == idString) e.hide()
+    })
+  }
+  showElementsWithIdStartingWith = function(idString) {
+    document.querySelectorAll("button").forEach(e => {
+      if (e.id.slice(0, idString.length) == idString) e.show()
+    })
+  }
   makeElement = function(id, type, width, style, text, event, action) {
     element = document.createElement(type)
     element.style.cssText = style
@@ -26,9 +42,9 @@ Buttons = new function() {
   }
   this.makeInputButton = function(id) {
     makeTextButton(id)
-    makeKeyboard()
+    Keyboard.makeKeyboard()
   }
-  makeKeyboard = function() {
+  Keyboard = new function() {
     textToShow = ""
     keyboardCase = "lowercase"
     changeCase = () => {
@@ -57,16 +73,16 @@ Buttons = new function() {
     }
     addCharacter = (letter) => {
       textToShow = textToShow + letter
-      inputBox.innerHTML = textToShow
+      kbInputBox.innerHTML = textToShow
       if (keyboardCase == "uppercase") changeCase()
     }
     text = (id) => document.getElementById(id)
     del = () => {
-      textToShow = inputBox.innerHTML = textToShow.
+      textToShow = kbInputBox.innerHTML = textToShow.
       slice(0, textToShow.length - 1)
       inputBox.text = textToShow
     }
-    showKeyboard = () => {
+    this.makeKeyboard = () => {
       line1 = characters[keyboardCase].line1.split("")
       line1.forEach((v, i) =>
         makeKeyButton("kb1" + i, 10, buttonStyle, v,
@@ -84,7 +100,7 @@ Buttons = new function() {
       line4.forEach((v, i) => makeKeyButton("kb4" + i, 10, buttonStyle, v, () => addCharacter(text("kb4" + i).innerHTML)))
       makeKeyButton("kbdelete", 15, buttonStyle, "\u232B", () => del())
       makeKeyButton("kbspace", 50, buttonStyle, "space", () => addCharacter(" "))
+      hideElementsWithIdStartingWith("kb")
     }
-    showKeyboard()
   }
 }
