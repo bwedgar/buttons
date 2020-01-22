@@ -41,11 +41,15 @@ Buttons = new function() {
     makeElement(id, "button", 100, buttonStyle, "", "change", () => alert(6))
   }
   this.makeInputButton = function(id) {
-    makeTextButton(id)
-    Keyboard.makeKeyboard()
+    InputButton.makeInputButton(id)
   }
-  Keyboard = new function() {
+  InputButton = new function() {
+    this.makeInputButton2 = function() {
+      Buttons.makeButton("kbInputButton", 100, " ", () => alert(7))
+      makeKeyboard()
+    }
     textToShow = ""
+    const textChanged = new Event('textChanged');
     keyboardCase = "lowercase"
     changeCase = () => {
       keyboardCase = keyboardCase == "lowercase" ? "uppercase" : "lowercase"
@@ -73,16 +77,16 @@ Buttons = new function() {
     }
     addCharacter = (letter) => {
       textToShow = textToShow + letter
-      kbInputBox.innerHTML = textToShow
+      kbInputButton.innerHTML = textToShow
       if (keyboardCase == "uppercase") changeCase()
     }
     text = (id) => document.getElementById(id)
     del = () => {
-      textToShow = kbInputBox.innerHTML = textToShow.
-      slice(0, textToShow.length - 1)
-      inputBox.text = textToShow
+      textToShow = textToShow.slice(0, textToShow.length - 1)
+      kbInputButton.innerHTML = textToShow
     }
-    this.makeKeyboard = () => {
+    makeKeyboard = () => {
+      console.log("make keyboard")
       line1 = characters[keyboardCase].line1.split("")
       line1.forEach((v, i) =>
         makeKeyButton("kb1" + i, 10, buttonStyle, v,
@@ -100,7 +104,7 @@ Buttons = new function() {
       line4.forEach((v, i) => makeKeyButton("kb4" + i, 10, buttonStyle, v, () => addCharacter(text("kb4" + i).innerHTML)))
       makeKeyButton("kbdelete", 15, buttonStyle, "\u232B", () => del())
       makeKeyButton("kbspace", 50, buttonStyle, "space", () => addCharacter(" "))
-      hideElementsWithIdStartingWith("kb")
+      //hideElementsWithIdStartingWith("kb")
     }
   }
 }
