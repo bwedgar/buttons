@@ -4,7 +4,7 @@ Buttons = new function() {
   buttonStyle=basicStyle+"border-style:solid;border-width:1px;verticalAlign:top;padding:5px;display:inlineBlock"
   listStyle=buttonStyle+"text-align:left;"
   imageStyle=basicStyle+"overflowX:hidden;marginLeft:auto;"+
-    "marginRight:auto;verticalAlign:middle;" 
+    "marginRight:auto;verticalAlign:middle;"
 
   makeElement=function(id,type,width,style,text,event,action){
     element=document.createElement(type)
@@ -62,7 +62,7 @@ line3:"ASDFGHJKL",line4:"ZXCVBNM"}
     showKeyboard=()=>{
       line1=characters[keyboardCase].line1.split("")
       line1.forEach((v,i)=>
-        makeKeyButton("kb1"+i,10,buttonStyle,v,  
+        makeKeyButton("kb1"+i,10,buttonStyle,v,
          ()=>addCharacter(text("kb1"+i).innerHTML)))
       line2=characters[keyboardCase].line2.split("")
       line2.forEach((v,i)=>
@@ -81,5 +81,3 @@ makeKeyButton("space",50,buttonStyle,"space",()=>addCharacter(" "))
 showKeyboard()
   }
 }
-Buttons.makeButton("button1",8,"button",(e)=>e.target.innerHTML="78")
-Buttons.makeInputButton("inputBox")
