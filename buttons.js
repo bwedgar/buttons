@@ -1,9 +1,11 @@
 var Buttons = new function() {
-  basicStyle = "color:red;background:black;font-size:4.5vw;font-family:verdana;"
-  buttonStyle = basicStyle + "border-style:solid;border-width:1px;verticalAlign:top;padding:5px;display:inlineBlock"
-  listStyle = buttonStyle + "text-align:left;"
-  imageStyle = basicStyle + "overflowX:hidden;marginLeft:auto;" +
-    "marginRight:auto;verticalAlign:middle;"
+
+  this.setStyle = (textColour, backgroundColour, fontSize) => {
+    basicStyle = `color:${textColour};background:${backgroundColour};font-size:${fontSize}vw;font-family:verdana;`
+    buttonStyle = basicStyle + `border-style:solid;border-width:1px;border-color:${textColour};verticalAlign:top;padding:5px;display:inlineBlock`
+    listStyle = buttonStyle + "text-align:left;"
+    imageStyle = basicStyle + "overflowX:hidden;marginLeft:auto;marginRight:auto;verticalAlign:middle;"
+  }
 
   Element.prototype.hide = function() {
     this.style.display = "none"
@@ -22,7 +24,7 @@ var Buttons = new function() {
 
   this.hideElementsWithGroupName = function(idString) {
     document.querySelectorAll("button").forEach(e => {
-        console.log(e.id.match(/[A-Za-z]+/)[0])
+      console.log(e.id.match(/[A-Za-z]+/)[0])
       if (e.id.match(/[A-Za-z]+/)[0] == idString) e.hide()
     })
   }
