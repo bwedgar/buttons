@@ -1,8 +1,15 @@
 Buttons = new function() {
+<<<<<<< HEAD
   basicStyle = "color:black;background:white;font-size:4.5vw;font-family:verdana;"
   buttonStyle = basicStyle + "border-style:solid;border-width:1px;verticalAlign:top;padding:5px;display:inlineBlock"
   listStyle = buttonStyle + "text-align:left;"
   imageStyle = basicStyle + "overflowX:hidden;marginLeft:auto;" +
+=======
+  basicStyle="color:black;background:white;font-size:4.5vw;font-family:verdana;"
+  buttonStyle=basicStyle+"border-style:solid;border-width:1px;verticalAlign:top;padding:5px;display:inlineBlock"
+  listStyle=buttonStyle+"text-align:left;"
+  imageStyle=basicStyle+"overflowX:hidden;marginLeft:auto;"+
+>>>>>>> c98c6950f6ea561633d2937d2bdd0a2ee2c3fe6d
     "marginRight:auto;verticalAlign:middle;"
 
   Element.prototype.hide = function() {
@@ -75,6 +82,7 @@ Buttons = new function() {
       line3: "ASDFGHJKL",
       line4: "ZXCVBNM"
     }
+<<<<<<< HEAD
     addCharacter = (letter) => {
       textToShow = textToShow + letter
       kbInputButton.innerHTML = textToShow
@@ -105,6 +113,28 @@ Buttons = new function() {
     makeKeyButton("kbdelete", 15, buttonStyle, "\u232B", () => del())
     makeKeyButton("kbspace", 50, buttonStyle, "space", () => addCharacter(" "))
     //hideElementsWithIdStartingWith("kb")
+=======
+    showKeyboard=()=>{
+      line1=characters[keyboardCase].line1.split("")
+      line1.forEach((v,i)=>
+        makeKeyButton("kb1"+i,10,buttonStyle,v,
+         ()=>addCharacter(text("kb1"+i).innerHTML)))
+      line2=characters[keyboardCase].line2.split("")
+      line2.forEach((v,i)=>
+        makeKeyButton("kb2"+i,10,buttonStyle,v,
+          ()=>addCharacter(text("kb2"+i).innerHTML)))
+      makeKeyButton("filler",5,buttonStyle,"&#8202;")
+line3=characters[keyboardCase].line3.split("")
+line3.forEach((v,i)=>makeKeyButton("kb3"+i,10,buttonStyle,v,()=>addCharacter(text("kb3"+i).innerHTML)))
+makeKeyButton("filler",5,buttonStyle,"&#8194;")
+makeKeyButton("case",15,buttonStyle,"\u21E7",()=>changeCase())
+line4=characters[keyboardCase].line4.split("")
+line4.forEach((v,i)=>makeKeyButton("kb4"+i,10,buttonStyle,v,()=>addCharacter(text("kb4"+i).innerHTML)))
+makeKeyButton("delete",15,buttonStyle,"\u232B",()=>del())
+makeKeyButton("space",50,buttonStyle,"space",()=>addCharacter(" "))
+}
+showKeyboard()
+>>>>>>> c98c6950f6ea561633d2937d2bdd0a2ee2c3fe6d
   }
   //  }
 }
