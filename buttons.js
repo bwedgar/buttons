@@ -1,5 +1,5 @@
-Buttons = new function() {
-  basicStyle = "color:black;background:white;font-size:4.5vw;font-family:verdana;"
+var Buttons = new function() {
+  basicStyle = "color:red;background:black;font-size:4.5vw;font-family:verdana;"
   buttonStyle = basicStyle + "border-style:solid;border-width:1px;verticalAlign:top;padding:5px;display:inlineBlock"
   listStyle = buttonStyle + "text-align:left;"
   imageStyle = basicStyle + "overflowX:hidden;marginLeft:auto;" +
@@ -22,7 +22,7 @@ Buttons = new function() {
 
   this.hideElementsWithGroupName = function(idString) {
     document.querySelectorAll("button").forEach(e => {
-      //  console.log(e.id.match(/[A-Za-z]+/)[0])
+        console.log(e.id.match(/[A-Za-z]+/)[0])
       if (e.id.match(/[A-Za-z]+/)[0] == idString) e.hide()
     })
   }
@@ -52,6 +52,10 @@ Buttons = new function() {
   makeTextButton = function(id) {
     makeElement(id, "button", 100, buttonStyle, "", "change", () => alert(6))
   }
+  this.makeCanvasButton = function(id) {
+    this.makeButton(id, 100, "<canvas id='canvasFinder'></canvas>", () => alert(7))
+  }
+
 
   this.makeInputButton = function() {
     this.makeButton("kbInputButton", 100, " ", () => alert(7))
