@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width" />
+  <title>Buttons framework</title>
+</head>
+
+<body>
+  <script src="buttons.js"></script>
+  <script>
+    Buttons.makeButton("button1", 8, "button1")
+    Buttons.makeButton("button2", 8, "button2")
+    Buttons.makeButton("button3", 8, "button3")
+    Buttons.makeButton("title1", 8, "button3")
+    Buttons.hideElementsWithGroupName("button")
+    console.log(button3.groupName()+" "+button3.index())
+    //button3.id()
+    //Buttons.makeButton("button4",8,"button",(e)=>showElementsWithIdStartingWith("kb"))
+    //Buttons.makeInputButton("kbInputBox")
+    //Buttons.makeKeyButton("t")
+    Buttons.makeInputButton()
+  </script>
+</body>
+
+</html>
