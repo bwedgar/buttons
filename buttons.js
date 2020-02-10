@@ -48,6 +48,9 @@ var Buttons = new function() {
   this.makeButton = function(id, width, text, action) {
     makeElement(id, "button", width, buttonStyle, text, "click", action)
   }
+  this.makeListButton = function(id, width, text, action) {
+    makeElement(id, "button", width, listStyle, text, "click", action)
+  }
   makeKeyButton = function(id, width, style, text, action) {
     makeElement(id, "button", width, style, text, "click", action)
   }
