@@ -2,7 +2,7 @@ var Buttons = new function() {
 
   this.setStyle = (textColour, backgroundColour, fontSize) => {
     basicStyle = `color:${textColour};background:${backgroundColour};font-size:${fontSize}vw;font-family:verdana;`
-    buttonStyle = basicStyle + `border-style:solid;border-width:1px;border-color:${textColour};verticalAlign:top;padding:5px;display:inlineBlock`
+    buttonStyle = basicStyle + `border-style:solid;border-width:1px;border-color:${textColour};verticalAlign:top;padding:5px;display:inlineBlock;`
     listStyle = buttonStyle + "text-align:left;"
     imageStyle = basicStyle + "overflowX:hidden;marginLeft:auto;marginRight:auto;verticalAlign:middle;"
   }
